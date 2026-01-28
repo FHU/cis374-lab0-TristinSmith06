@@ -29,7 +29,19 @@ public sealed class HashWordSet : IWordSet
     /// TODO
     public string? Prev(string word)
     {
-        throw new NotImplementedException();
+        string? best = null;
+
+        // look for a better best
+        foreach(var w in words)
+        {
+            if( word.CompareTo(w) > 0
+                && (best is null || w.CompareTo(best) > 0))
+            {
+                best = w;
+            }
+        }
+
+        return best;
     }
 
     public string? Next(string word)
@@ -70,7 +82,28 @@ public sealed class HashWordSet : IWordSet
     /// TODO
     public IEnumerable<string> Range(string lo, string hi, int k)
     {
-        throw new NotImplementedException();
+        var results = new List<string>();
+        System.Console.WriteLine($"Checking for words between {lo} and {hi}");
+
+        foreach (var word in words)
+        {
+            System.Console.WriteLine($"Checking {word}");
+            if (word.CompareTo(lo) >= 0 && word.CompareTo(hi) <= 0)
+            {
+                results.Add(word);
+                System.Console.WriteLine($"{word} was between them, added");
+            }
+        }
+
+        results.Sort();
+
+        foreach (var item in results)
+        {
+            System.Console.WriteLine($"{item} in final list");
+        }
+
+        return results.Slice(0, Math.Min(k, results.Count));
+
     }
 
 }
