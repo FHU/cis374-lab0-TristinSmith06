@@ -9,6 +9,8 @@
 /// </summary>
 public sealed class HashWordSet : IWordSet
 {
+
+    public int Count => words.Count();
     private HashSet<string> words = new();
 
     public bool Add(string word)
@@ -106,4 +108,13 @@ public sealed class HashWordSet : IWordSet
 
     }
 
+
+    public string Normalize(string word)
+    {
+        if (string.IsNullOrWhiteSpace(word))
+        {
+            return string.Empty;
+        }
+        return word.Trim().ToLowerInvariant();
+    }
 }

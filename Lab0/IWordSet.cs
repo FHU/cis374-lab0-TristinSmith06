@@ -4,6 +4,7 @@
 /// </summary>
 public interface IWordSet
 {
+    public int Count { get;}
     bool Add(string word);
     bool Remove(string word);
     bool Contains(string word);
