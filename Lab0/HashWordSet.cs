@@ -1,4 +1,4 @@
-
+namespace Lab0;
 // [ "ryan", "beau", "caleb", "rye", 
 // "beautiful", "cale", "cephas", "rhino", "cervid", "cecily"
 // "ethan" , "ethel"]
@@ -109,12 +109,4 @@ public sealed class HashWordSet : IWordSet
     }
 
 
-    public string Normalize(string word)
-    {
-        if (string.IsNullOrWhiteSpace(word))
-        {
-            return string.Empty;
-        }
-        return word.Trim().ToLowerInvariant();
-    }
 }
