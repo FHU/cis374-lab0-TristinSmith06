@@ -1,6 +1,3 @@
-
-using System.Reflection.Metadata.Ecma335;
-
 namespace Lab0;
 
 public class SortedWordSet : IWordSet
@@ -78,13 +75,28 @@ public class SortedWordSet : IWordSet
 
         return results;
 
-
-
     }
 
     public string? Prev(string word)
     {
-        throw new NotImplementedException();
+        var norm = Normalize(word);
+        if (norm.Length == 0 || words.Count == 0)
+        {
+            return null;
+        }
+
+        var wordsInRange = words.GetViewBetween("!", norm);
+
+        foreach (var item in wordsInRange.Reverse())
+        {
+            if (item.CompareTo(norm) < 0)
+            {
+                return item;
+            }
+        }
+
+        return null;
+
     }
 
     public IEnumerable<string> Range(string lo, string hi, int k)
@@ -101,7 +113,7 @@ public class SortedWordSet : IWordSet
         var wordRange = words.GetViewBetween(lo_norm, hi_norm);
 
         var count = 0;
-        
+
         foreach (var item in wordRange)
         {
             results.Add(item);
