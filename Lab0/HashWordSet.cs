@@ -85,24 +85,16 @@ public sealed class HashWordSet : IWordSet
     public IEnumerable<string> Range(string lo, string hi, int k)
     {
         var results = new List<string>();
-        System.Console.WriteLine($"Checking for words between {lo} and {hi}");
 
         foreach (var word in words)
         {
-            System.Console.WriteLine($"Checking {word}");
             if (word.CompareTo(lo) >= 0 && word.CompareTo(hi) <= 0)
             {
                 results.Add(word);
-                System.Console.WriteLine($"{word} was between them, added");
             }
         }
 
         results.Sort();
-
-        foreach (var item in results)
-        {
-            System.Console.WriteLine($"{item} in final list");
-        }
 
         return results.Slice(0, Math.Min(k, results.Count));
 
